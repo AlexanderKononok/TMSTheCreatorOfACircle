@@ -28,24 +28,27 @@ class GameViewController: UIViewController {
   
   @objc func processTap(_ gesture: UITapGestureRecognizer) {
     let coord = gesture.location(in: fieldForCirclesView)
-    createCircle(x: coord.x, y: coord.y)
+
+//    print("Array circles:\n \(arrCircles)")
+//    print("=======================================")
     
-//    print("=================ALL VIEW========================")
-//    print(arrCircles.count)
-    
-    circleWhichWillRemoved = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
-//    print("================WILL REMOVED========================")
-//    print(circleWhichWillRemoved)
-    
-    if circleWhichWillRemoved.count > 1 {
-      for circle in circleWhichWillRemoved {
-        circle.removeFromSuperview()
+    if arrCircles != [] {
+      createCircle(x: coord.x, y: coord.y)
+      circleWhichWillRemoved = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
+      
+//      print("Second arr:\n \(circleWhichWillRemoved)")
+//      print("=======================================")
+      
+      if circleWhichWillRemoved.count > 1 {
+        for circle in circleWhichWillRemoved {
+//          print("Circle: \(circle)")
+          circle.removeFromSuperview()
+          arrCircles.removeAll { $0 == circle }
+        }
       }
-//      let indexCircle = arrCircles.firstIndex(of: circleWhichWillRemoved[0])
-//      arrCircles.remove(at: indexCircle!)
-//      circleWhichWillRemoved = []
+    } else {
+      createCircle(x: coord.x, y: coord.y)
     }
-    
     
   }
   
