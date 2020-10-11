@@ -32,23 +32,20 @@ class GameViewController: UIViewController {
 //    print("Array circles:\n \(arrCircles)")
 //    print("=======================================")
     
-    if arrCircles != [] {
-      createCircle(x: coord.x, y: coord.y)
-      circleWhichWillRemoved = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
-      
-//      print("Second arr:\n \(circleWhichWillRemoved)")
-//      print("=======================================")
-      
-      if circleWhichWillRemoved.count > 1 {
-        for circle in circleWhichWillRemoved {
-//          print("Circle: \(circle)")
-          circle.removeFromSuperview()
-          arrCircles.removeAll { $0 == circle }
-        }
+    createCircle(x: coord.x, y: coord.y)
+    circleWhichWillRemoved = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
+    
+//    print("Second arr:\n \(circleWhichWillRemoved)")
+//    print("=======================================")
+    
+    if circleWhichWillRemoved.count > 1 {
+      for circle in circleWhichWillRemoved {
+        //          print("Circle: \(circle)")
+        circle.removeFromSuperview()
+        arrCircles.removeAll { $0 == circle }
       }
-    } else {
-      createCircle(x: coord.x, y: coord.y)
     }
+    
     
   }
   
