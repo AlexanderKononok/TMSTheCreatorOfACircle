@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
   
   var circle: UIView!
   var arrCircles: [UIView] = []
+  var circleWhichWillRemoved: [UIView] = []
   
   let side: CGFloat = 100
   
@@ -29,18 +30,23 @@ class GameViewController: UIViewController {
     let coord = gesture.location(in: fieldForCirclesView)
     createCircle(x: coord.x, y: coord.y)
     
-    print(arrCircles)
-    print("============================================")
+//    print("=================ALL VIEW========================")
+//    print(arrCircles.count)
     
-    var circleWhichWillRemoved: [UIView] = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
-    print(circleWhichWillRemoved)
+    circleWhichWillRemoved = arrCircles.filter({ ($0.frame.minX < coord.x && coord.x < $0.frame.maxX && $0.frame.minY < coord.y && coord.y < $0.frame.maxY) })
+//    print("================WILL REMOVED========================")
+//    print(circleWhichWillRemoved)
+    
     if circleWhichWillRemoved.count > 1 {
       for circle in circleWhichWillRemoved {
         circle.removeFromSuperview()
       }
-      circleWhichWillRemoved = []
+//      let indexCircle = arrCircles.firstIndex(of: circleWhichWillRemoved[0])
+//      arrCircles.remove(at: indexCircle!)
+//      circleWhichWillRemoved = []
     }
-    print("============================================")
+    
+    
   }
   
   func createCircle(x: CGFloat, y: CGFloat) {
